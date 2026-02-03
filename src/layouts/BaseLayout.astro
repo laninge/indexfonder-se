@@ -1,4 +1,6 @@
 ---
+import PasswordGate from '../components/PasswordGate.astro';
+
 interface Props {
   title: string;
   description: string;
@@ -169,6 +171,7 @@ const howToSchema = {
   </style>
 </head>
 <body>
+  <PasswordGate />
   <slot />
 </body>
 </html>
