@@ -1,0 +1,6 @@
+# Robots.txt for indexfonder.se
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://indexfonder.se/sitemap.xml

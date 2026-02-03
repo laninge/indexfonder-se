@@ -1,0 +1,174 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+}
+
+const { title, description, canonicalUrl = 'https://indexfonder.se/' } = Astro.props;
+const currentDate = new Date().toISOString().split('T')[0];
+
+// Schema.org structured data
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Opti",
+  "url": "https://opti.se",
+  "logo": "https://opti.se/logo.png",
+  "sameAs": [
+    "https://www.linkedin.com/company/opti-se",
+    "https://www.facebook.com/optise"
+  ]
+};
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": "2026-01-01",
+  "dateModified": currentDate,
+  "author": {
+    "@type": "Organization",
+    "name": "Opti"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Opti",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://opti.se/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalUrl
+  }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Vad är en indexfond?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En indexfond är en fond som följer ett börsindex, till exempel OMXS30 eller MSCI World. Istället för att en fondförvaltare aktivt väljer aktier, köper fonden automatiskt samma aktier som finns i indexet. Detta gör indexfonder billigare och ofta mer lönsamma än aktivt förvaltade fonder."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Hur mycket kostar en indexfond?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Indexfonder har vanligtvis en årlig avgift på 0,1-0,4%, jämfört med 1-2% för aktivt förvaltade fonder. Över tid kan denna skillnad innebära hundratusentals kronor mer i avkastning."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vilken indexfond är bäst?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Det beror på dina mål. För global exponering rekommenderas fonder som följer MSCI World. För Sverige är SIX PRX-index populärt. Viktigast är låg avgift och att fonden följer sitt index noggrant."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ska jag välja ISK eller kapitalförsäkring?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ISK (Investeringssparkonto) rekommenderas för de flesta. Du betalar en låg schablonskatt årligen istället för kapitalvinstskatt vid försäljning. Det är enkelt och skatteeffektivt för långsiktigt sparande."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Hur mycket ska jag spara i indexfonder?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En tumregel är att spara minst 10% av din inkomst. Börja med det du har råd med - även 500 kr i månaden växer över tid. Det viktigaste är att börja och vara konsekvent."
+      }
+    }
+  ]
+};
+
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Så börjar du spara i indexfonder",
+  "description": "En steg-för-steg guide för att börja spara i indexfonder",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Öppna ett ISK-konto",
+      "text": "Välj en bank eller nätmäklare och öppna ett investeringssparkonto (ISK). Det tar oftast bara några minuter med BankID."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Välj en indexfond",
+      "text": "Välj en indexfond med låg avgift som passar din risknivå. En global indexfond är ett bra förstaval."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Sätt upp månadssparande",
+      "text": "Automatisera ditt sparande genom att sätta upp en månadsöverföring. Då slipper du tänka på det och drar nytta av genomsnittskostnadseffekten."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Låt pengarna jobba",
+      "text": "Ha tålamod och låt pengarna växa över tid. Indexfonder är bäst för långsiktigt sparande på minst 5-10 år."
+    }
+  ]
+};
+---
+
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta name="robots" content="index, follow" />
+
+  <title>{title}</title>
+
+  <link rel="canonical" href={canonicalUrl} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content="https://indexfonder.se/og-image.jpg" />
+  <meta property="og:locale" content="sv_SE" />
+  <meta property="og:site_name" content="Indexfonder.se" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="https://indexfonder.se/og-image.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+
+  <style is:global>
+    @import '../styles/global.css';
+  </style>
+</head>
+<body>
+  <slot />
+</body>
+</html>

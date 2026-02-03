@@ -1,0 +1,229 @@
+---
+// Sparräknare - interactive calculator
+---
+
+<div class="calculator card">
+  <h3 class="calculator__title">Sparräknare</h3>
+  <p class="calculator__subtitle">Se hur ditt sparande kan växa över tid</p>
+
+  <div class="calculator__form">
+    <div class="calculator__field">
+      <label for="monthly">Månadssparande</label>
+      <div class="calculator__input-wrapper">
+        <input
+          type="number"
+          id="monthly"
+          value="2000"
+          min="100"
+          max="100000"
+          step="100"
+        />
+        <span class="calculator__suffix">kr</span>
+      </div>
+    </div>
+
+    <div class="calculator__field">
+      <label for="years">Spartid</label>
+      <div class="calculator__input-wrapper">
+        <input
+          type="number"
+          id="years"
+          value="20"
+          min="1"
+          max="50"
+        />
+        <span class="calculator__suffix">år</span>
+      </div>
+    </div>
+
+    <div class="calculator__field">
+      <label for="return">Förväntad avkastning</label>
+      <div class="calculator__input-wrapper">
+        <input
+          type="number"
+          id="return"
+          value="7"
+          min="0"
+          max="20"
+          step="0.5"
+        />
+        <span class="calculator__suffix">%</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="calculator__result">
+    <div class="calculator__result-row">
+      <span class="calculator__result-label">Totalt insatt</span>
+      <span class="calculator__result-value" id="totalInvested">480 000 kr</span>
+    </div>
+    <div class="calculator__result-row">
+      <span class="calculator__result-label">Avkastning</span>
+      <span class="calculator__result-value text-green" id="totalReturn">560 000 kr</span>
+    </div>
+    <div class="calculator__result-row calculator__result-row--total">
+      <span class="calculator__result-label">Totalt värde</span>
+      <span class="calculator__result-value" id="totalValue">1 040 000 kr</span>
+    </div>
+  </div>
+
+  <p class="calculator__disclaimer">
+    Beräkningen är en förenklad uppskattning och tar inte hänsyn till avgifter, skatter eller inflation.
+    Historisk avkastning är ingen garanti för framtida resultat.
+  </p>
+</div>
+
+<style>
+  .calculator {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .calculator__title {
+    margin-bottom: 0.5rem;
+  }
+
+  .calculator__subtitle {
+    color: var(--gray-500);
+    margin-bottom: 2rem;
+  }
+
+  .calculator__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .calculator__field label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--navy);
+    font-size: var(--font-size-sm);
+  }
+
+  .calculator__input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .calculator__field input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    padding-right: 3rem;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    background-color: var(--gray-50);
+    transition: all var(--transition-fast);
+  }
+
+  .calculator__field input:focus {
+    outline: none;
+    border-color: var(--blue);
+    background-color: var(--white);
+  }
+
+  .calculator__suffix {
+    position: absolute;
+    right: 1rem;
+    color: var(--gray-500);
+    font-weight: 500;
+  }
+
+  .calculator__result {
+    background-color: var(--gray-50);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .calculator__result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .calculator__result-row:last-child {
+    border-bottom: none;
+  }
+
+  .calculator__result-row--total {
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+    border-top: 2px solid var(--navy);
+    border-bottom: none;
+  }
+
+  .calculator__result-label {
+    color: var(--gray-600);
+  }
+
+  .calculator__result-row--total .calculator__result-label {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .calculator__result-value {
+    font-weight: 700;
+    font-size: var(--font-size-lg);
+    color: var(--navy);
+  }
+
+  .calculator__result-row--total .calculator__result-value {
+    font-size: var(--font-size-xl);
+  }
+
+  .calculator__disclaimer {
+    font-size: var(--font-size-sm);
+    color: var(--gray-500);
+    margin-bottom: 0;
+  }
+</style>
+
+<script>
+  function formatCurrency(value: number): string {
+    return new Intl.NumberFormat('sv-SE', {
+      style: 'decimal',
+      maximumFractionDigits: 0,
+    }).format(value) + ' kr';
+  }
+
+  function calculateSavings(): void {
+    const monthly = parseFloat((document.getElementById('monthly') as HTMLInputElement).value) || 0;
+    const years = parseFloat((document.getElementById('years') as HTMLInputElement).value) || 0;
+    const annualReturn = parseFloat((document.getElementById('return') as HTMLInputElement).value) || 0;
+
+    const monthlyReturn = annualReturn / 100 / 12;
+    const months = years * 12;
+
+    const totalInvested = monthly * months;
+
+    // Future value of a series formula
+    let totalValue: number;
+    if (monthlyReturn === 0) {
+      totalValue = totalInvested;
+    } else {
+      totalValue = monthly * ((Math.pow(1 + monthlyReturn, months) - 1) / monthlyReturn);
+    }
+
+    const totalReturn = totalValue - totalInvested;
+
+    (document.getElementById('totalInvested') as HTMLElement).textContent = formatCurrency(totalInvested);
+    (document.getElementById('totalReturn') as HTMLElement).textContent = formatCurrency(totalReturn);
+    (document.getElementById('totalValue') as HTMLElement).textContent = formatCurrency(totalValue);
+  }
+
+  // Add event listeners
+  ['monthly', 'years', 'return'].forEach(id => {
+    document.getElementById(id)?.addEventListener('input', calculateSavings);
+  });
+
+  // Initial calculation
+  calculateSavings();
+</script>

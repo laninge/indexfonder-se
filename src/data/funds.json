@@ -1,0 +1,87 @@
+{
+  "global": [
+    {
+      "name": "Avanza Global",
+      "index": "MSCI World",
+      "fee": "0.10%",
+      "return1y": "+18.2%",
+      "return5y": "+72.4%",
+      "risk": "Medel"
+    },
+    {
+      "name": "Länsförsäkringar Global Index",
+      "index": "MSCI World",
+      "fee": "0.17%",
+      "return1y": "+17.9%",
+      "return5y": "+71.8%",
+      "risk": "Medel"
+    },
+    {
+      "name": "SPP Aktiefond Global",
+      "index": "MSCI World",
+      "fee": "0.14%",
+      "return1y": "+17.8%",
+      "return5y": "+70.2%",
+      "risk": "Medel"
+    },
+    {
+      "name": "Handelsbanken Global Index",
+      "index": "MSCI World",
+      "fee": "0.20%",
+      "return1y": "+17.5%",
+      "return5y": "+69.8%",
+      "risk": "Medel"
+    },
+    {
+      "name": "Nordnet Indexfond Global",
+      "index": "MSCI World",
+      "fee": "0.20%",
+      "return1y": "+17.4%",
+      "return5y": "+68.5%",
+      "risk": "Medel"
+    }
+  ],
+  "sweden": [
+    {
+      "name": "Avanza Zero",
+      "index": "SIX PRX",
+      "fee": "0.00%",
+      "return1y": "+12.4%",
+      "return5y": "+58.2%",
+      "risk": "Hög"
+    },
+    {
+      "name": "SPP Sverige Plus",
+      "index": "SIX PRX",
+      "fee": "0.10%",
+      "return1y": "+12.1%",
+      "return5y": "+56.8%",
+      "risk": "Hög"
+    },
+    {
+      "name": "Länsförsäkringar Sverige Index",
+      "index": "SIX PRX",
+      "fee": "0.20%",
+      "return1y": "+11.8%",
+      "return5y": "+55.4%",
+      "risk": "Hög"
+    },
+    {
+      "name": "Handelsbanken Sverige Index",
+      "index": "SIX PRX",
+      "fee": "0.20%",
+      "return1y": "+11.6%",
+      "return5y": "+54.2%",
+      "risk": "Hög"
+    },
+    {
+      "name": "SEB Sverige Indexfond",
+      "index": "SIX PRX",
+      "fee": "0.25%",
+      "return1y": "+11.2%",
+      "return5y": "+52.8%",
+      "risk": "Hög"
+    }
+  ],
+  "lastUpdated": "2026-02-01"
+}

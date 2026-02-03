@@ -1,0 +1,61 @@
+---
+interface Props {
+  id?: string;
+  title?: string;
+  subtitle?: string;
+  variant?: 'default' | 'dark' | 'gray';
+  centered?: boolean;
+}
+
+const { id, title, subtitle, variant = 'default', centered = false } = Astro.props;
+
+const sectionClass = [
+  'section',
+  variant === 'dark' && 'section--dark',
+  variant === 'gray' && 'section--gray',
+].filter(Boolean).join(' ');
+
+const headerClass = [
+  'section__header',
+  centered && 'section__header--centered',
+].filter(Boolean).join(' ');
+---
+
+<section class={sectionClass} id={id}>
+  <div class="container">
+    {(title || subtitle) && (
+      <div class={headerClass}>
+        {title && <h2 class="section__title">{title}</h2>}
+        {subtitle && <p class="section__subtitle">{subtitle}</p>}
+      </div>
+    )}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section__header {
+    margin-bottom: 3rem;
+  }
+
+  .section__header--centered {
+    text-align: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section__title {
+    margin-bottom: 1rem;
+  }
+
+  .section__subtitle {
+    font-size: var(--font-size-xl);
+    color: var(--gray-500);
+    margin-bottom: 0;
+  }
+
+  .section--dark .section__subtitle {
+    color: var(--gray-400);
+  }
+</style>

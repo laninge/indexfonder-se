@@ -1,0 +1,189 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = 'Vill du ha hjälp att komma igång?',
+  subtitle = 'Opti hjälper dig att optimera ditt sparande automatiskt. Lägre avgifter, smartare val, och en garanti att du aldrig betalar för mycket.'
+} = Astro.props;
+---
+
+<section class="cta section section--dark" id="hjalp-fran-opti">
+  <div class="container">
+    <div class="cta__content">
+      <h2 class="cta__title">{title}</h2>
+      <p class="cta__subtitle">{subtitle}</p>
+
+      <div class="cta__features">
+        <div class="cta__feature">
+          <div class="cta__feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Avgiftsgaranti</h4>
+            <p>Vi garanterar att du aldrig betalar mer än nödvändigt i avgifter.</p>
+          </div>
+        </div>
+
+        <div class="cta__feature">
+          <div class="cta__feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Automatisk optimering</h4>
+            <p>Vi bevakar dina fonder och byter automatiskt till bättre alternativ.</p>
+          </div>
+        </div>
+
+        <div class="cta__feature">
+          <div class="cta__feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="1" x2="12" y2="23"/>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Gratis att använda</h4>
+            <p>Inga dolda avgifter. Vi tjänar pengar när du sparar pengar.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta__buttons">
+        <a href="https://opti.se" class="btn btn--primary btn--large" target="_blank" rel="noopener">
+          Kom igång med Opti
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="cta__badges">
+        <a href="https://apps.apple.com/se/app/opti" target="_blank" rel="noopener" class="cta__badge">
+          <img src="/app-store-badge.svg" alt="Ladda ner på App Store" width="140" height="42" />
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=se.opti" target="_blank" rel="noopener" class="cta__badge">
+          <img src="/google-play-badge.svg" alt="Ladda ner på Google Play" width="140" height="42" />
+        </a>
+      </div>
+
+      <p class="cta__trust">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+        Över 100 000 svenskar sparar med Opti
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    text-align: center;
+  }
+
+  .cta__content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .cta__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+  }
+
+  .cta__subtitle {
+    font-size: var(--font-size-xl);
+    color: var(--gray-300);
+    margin-bottom: 3rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta__features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+    text-align: left;
+  }
+
+  .cta__feature {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .cta__feature-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(59, 130, 246, 0.2);
+    border-radius: var(--radius-lg);
+    color: var(--blue);
+  }
+
+  .cta__feature h4 {
+    font-size: var(--font-size-base);
+    margin-bottom: 0.25rem;
+    color: var(--white);
+  }
+
+  .cta__feature p {
+    font-size: var(--font-size-sm);
+    color: var(--gray-400);
+    margin-bottom: 0;
+  }
+
+  .cta__buttons {
+    margin-bottom: 2rem;
+  }
+
+  .cta__badges {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .cta__badge img {
+    height: 42px;
+    width: auto;
+  }
+
+  .cta__trust {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gray-400);
+    font-size: var(--font-size-sm);
+    margin-bottom: 0;
+  }
+
+  .cta__trust svg {
+    color: var(--green);
+  }
+
+  @media (max-width: 768px) {
+    .cta__features {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .cta__badges {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>

@@ -1,0 +1,639 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import FundTable from '../components/FundTable.astro';
+import FAQ from '../components/FAQ.astro';
+import Calculator from '../components/Calculator.astro';
+import CTASection from '../components/CTASection.astro';
+
+import fundsData from '../data/funds.json';
+
+const faqItems = [
+  {
+    question: "Vad är en indexfond?",
+    answer: "En indexfond är en fond som följer ett börsindex, till exempel OMXS30 eller MSCI World. Istället för att en fondförvaltare aktivt väljer aktier, köper fonden automatiskt samma aktier som finns i indexet. Detta gör indexfonder billigare och ofta mer lönsamma än aktivt förvaltade fonder."
+  },
+  {
+    question: "Hur mycket kostar en indexfond?",
+    answer: "Indexfonder har vanligtvis en årlig avgift på 0,1-0,4%, jämfört med 1-2% för aktivt förvaltade fonder. Över tid kan denna skillnad innebära hundratusentals kronor mer i avkastning."
+  },
+  {
+    question: "Vilken indexfond är bäst?",
+    answer: "Det beror på dina mål. För global exponering rekommenderas fonder som följer MSCI World. För Sverige är SIX PRX-index populärt. Viktigast är låg avgift och att fonden följer sitt index noggrant."
+  },
+  {
+    question: "Ska jag välja ISK eller kapitalförsäkring?",
+    answer: "ISK (Investeringssparkonto) rekommenderas för de flesta. Du betalar en låg schablonskatt årligen istället för kapitalvinstskatt vid försäljning. Det är enkelt och skatteeffektivt för långsiktigt sparande."
+  },
+  {
+    question: "Hur mycket ska jag spara i indexfonder?",
+    answer: "En tumregel är att spara minst 10% av din inkomst. Börja med det du har råd med - även 500 kr i månaden växer över tid. Det viktigaste är att börja och vara konsekvent."
+  },
+  {
+    question: "När ska jag börja spara?",
+    answer: "Så snart som möjligt! Tid är din största fördel tack vare ränta-på-ränta-effekten. 1 000 kr investerade i 30 år med 7% avkastning blir över 7 600 kr. Samma summa i 10 år blir bara 1 967 kr."
+  }
+];
+---
+
+<BaseLayout
+  title="Indexfonder - Komplett guide till indexfonder 2026 | Opti"
+  description="Lär dig allt om indexfonder: vad de är, hur de fungerar, och vilka som är bäst 2026. En oberoende guide från Opti med tips för nybörjare och erfarna sparare."
+>
+  <Header />
+  <Hero />
+
+  <!-- Vad är en indexfond? -->
+  <Section id="vad-ar-indexfond" title="Vad är en indexfond?" subtitle="En enkel förklaring på 30 sekunder">
+    <div class="two-column">
+      <div class="content-block">
+        <p class="lead">
+          En <strong>indexfond</strong> är en fond som automatiskt följer ett börsindex istället för att en förvaltare aktivt väljer aktier.
+        </p>
+
+        <p>
+          Till exempel följer en indexfond som spårar OMXS30 de 30 mest omsatta aktierna på Stockholmsbörsen.
+          Om Ericsson utgör 8% av indexet, så investerar fonden 8% av pengarna i Ericsson.
+        </p>
+
+        <div class="highlight-box">
+          <div class="highlight-stat">
+            <span class="highlight-number">1 av 15</span>
+            <span class="highlight-label">fonder i Sverige är indexfonder</span>
+          </div>
+          <p class="highlight-text">
+            Trots att de är få till antalet, har indexfonder visat sig slå majoriteten av aktivt förvaltade fonder över tid.
+          </p>
+        </div>
+      </div>
+
+      <div class="comparison-card">
+        <h4>Indexfond vs Aktiv fond</h4>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Indexfond</th>
+              <th>Aktiv fond</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Förvaltning</td>
+              <td class="text-green">Automatisk</td>
+              <td>Manuell</td>
+            </tr>
+            <tr>
+              <td>Avgift</td>
+              <td class="text-green">0.1-0.4%</td>
+              <td>1-2%</td>
+            </tr>
+            <tr>
+              <td>Mål</td>
+              <td>Följa index</td>
+              <td>Slå index</td>
+            </tr>
+            <tr>
+              <td>Resultat 15 år*</td>
+              <td class="text-green">Slår 93%</td>
+              <td>Slår 7%</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="table-note">*Källa: S&P SPIVA Report 2024</p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Hur fungerar indexfonder -->
+  <Section id="hur-fungerar" variant="gray" title="Så fungerar indexfonder" subtitle="Tre steg till automatiskt sparande">
+    <div class="steps">
+      <div class="step">
+        <div class="step__number">1</div>
+        <div class="step__content">
+          <h4>Fonden väljer ett index</h4>
+          <p>Fonden bestämmer sig för att följa ett specifikt index, till exempel MSCI World (globala aktier) eller SIX PRX (svenska aktier).</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step__number">2</div>
+        <div class="step__content">
+          <h4>Automatisk kopiering</h4>
+          <p>Fonden köper samma aktier i samma proportioner som indexet. Ingen förvaltare behöver fatta aktiva beslut.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step__number">3</div>
+        <div class="step__content">
+          <h4>Kontinuerlig anpassning</h4>
+          <p>När indexet ändras (bolag går in/ut), uppdaterar fonden automatiskt sina innehav för att fortsätta spegla indexet.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat__number">93%</span>
+        <span class="stat__label">av aktiva fonder underpresterar indexfonder på 15 år</span>
+      </div>
+      <div class="stat">
+        <span class="stat__number">0.1-0.4%</span>
+        <span class="stat__label">typisk årlig avgift för indexfonder</span>
+      </div>
+      <div class="stat">
+        <span class="stat__number">1-2%</span>
+        <span class="stat__label">typisk årlig avgift för aktiva fonder</span>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Hur väljer du rätt fond -->
+  <Section id="hur-valjer-du" title="Så väljer du rätt indexfond" subtitle="Tre faktorer att tänka på">
+    <div class="grid grid--3">
+      <div class="card">
+        <div class="card__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </div>
+        <h4>1. Vilket index?</h4>
+        <p>
+          <strong>MSCI World</strong> ger global spridning över 1 500+ bolag.
+          <strong>SIX PRX</strong> fokuserar på svenska bolag.
+          De flesta experter rekommenderar en global bas.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <h4>2. Spåra indexet noga?</h4>
+        <p>
+          En bra indexfond ska följa sitt index så nära som möjligt.
+          <strong>Tracking difference</strong> visar hur mycket fonden avviker.
+          Mindre är bättre.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="1" x2="12" y2="23"/>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <h4>3. Avgiften</h4>
+        <p>
+          Avgiften är det enda du kan kontrollera.
+          <strong>0.1% vs 1% avgift</strong> kan innebära flera hundra tusen kronor i skillnad över 30 år.
+        </p>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <h4>Tips: Kombinera för bästa resultat</h4>
+      <p>
+        En vanlig strategi är att ha <strong>80% i en global indexfond</strong> (MSCI World) och <strong>20% i en svensk indexfond</strong> (SIX PRX).
+        Detta ger global spridning med lite extra hem-bias.
+      </p>
+    </div>
+  </Section>
+
+  <!-- Bästa indexfonderna -->
+  <Section id="basta-indexfonder" variant="gray" title="Bästa indexfonderna februari 2026" subtitle="Uppdateras månadsvis baserat på avgift, avkastning och tracking">
+    <FundTable title="Globala indexfonder" funds={fundsData.global} />
+    <FundTable title="Svenska indexfonder" funds={fundsData.sweden} />
+
+    <div class="methodology-note">
+      <h4>Så har vi valt fonderna</h4>
+      <p>
+        Vi rankar fonderna baserat på en kombination av <strong>låg avgift</strong>, <strong>låg tracking difference</strong> och <strong>historisk avkastning</strong>.
+        Alla fonder på listan är tillgängliga för svenska sparare via vanliga banker och nätmäklare.
+      </p>
+    </div>
+  </Section>
+
+  <!-- Börja spara -->
+  <Section id="borja-spara" title="Börja spara i indexfonder" subtitle="Kom igång på 15 minuter">
+    <div class="timeline">
+      <div class="timeline__item">
+        <div class="timeline__marker">1</div>
+        <div class="timeline__content">
+          <h4>Öppna ett ISK-konto</h4>
+          <p>Välj en bank eller nätmäklare (Avanza, Nordnet, din bank). Öppna ett <strong>Investeringssparkonto (ISK)</strong> - det är skatteeffektivt och enkelt.</p>
+        </div>
+      </div>
+
+      <div class="timeline__item">
+        <div class="timeline__marker">2</div>
+        <div class="timeline__content">
+          <h4>Välj en indexfond</h4>
+          <p>Börja med en global indexfond som följer MSCI World. Se våra <a href="#basta-indexfonder">rekommendationer ovan</a>.</p>
+        </div>
+      </div>
+
+      <div class="timeline__item">
+        <div class="timeline__marker">3</div>
+        <div class="timeline__content">
+          <h4>Sätt upp månadssparande</h4>
+          <p>Automatisera ditt sparande. Bestäm en summa som dras automatiskt varje månad - så slipper du tänka på det.</p>
+        </div>
+      </div>
+
+      <div class="timeline__item">
+        <div class="timeline__marker">4</div>
+        <div class="timeline__content">
+          <h4>Låt pengarna jobba</h4>
+          <p>Ha tålamod! Indexfonder är för långsiktigt sparande (5+ år). Undvik att kolla kontot för ofta.</p>
+        </div>
+      </div>
+    </div>
+
+    <Calculator />
+  </Section>
+
+  <!-- FAQ -->
+  <Section id="faq" title="Vanliga frågor om indexfonder" subtitle="Snabba svar på de vanligaste frågorna" centered>
+    <FAQ items={faqItems} />
+  </Section>
+
+  <!-- CTA -->
+  <CTASection />
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__content">
+        <div class="footer__brand">
+          <span class="footer__logo">indexfonder.se</span>
+          <p>En tjänst från Opti - Sveriges smartaste spartjänst</p>
+        </div>
+        <div class="footer__links">
+          <a href="https://opti.se" target="_blank" rel="noopener">Opti.se</a>
+          <a href="https://opti.se/om-oss" target="_blank" rel="noopener">Om Opti</a>
+          <a href="https://opti.se/integritetspolicy" target="_blank" rel="noopener">Integritetspolicy</a>
+        </div>
+      </div>
+      <div class="footer__disclaimer">
+        <p>
+          Informationen på denna sida utgör inte finansiell rådgivning. Historisk avkastning är ingen garanti för framtida avkastning.
+          Värdet på dina investeringar kan både öka och minska. Läs alltid fondens faktablad innan du investerar.
+        </p>
+        <p>&copy; 2026 Opti Financial Services AB. Alla rättigheter förbehållna.</p>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  /* Two column layout */
+  .two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .content-block .lead {
+    font-size: var(--font-size-xl);
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Highlight box */
+  .highlight-box {
+    background: linear-gradient(135deg, var(--blue) 0%, #1d4ed8 100%);
+    color: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius-xl);
+    margin-top: 2rem;
+  }
+
+  .highlight-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .highlight-number {
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+  }
+
+  .highlight-label {
+    font-size: var(--font-size-lg);
+    opacity: 0.9;
+  }
+
+  .highlight-text {
+    margin-bottom: 0;
+    opacity: 0.9;
+  }
+
+  /* Comparison card */
+  .comparison-card {
+    background-color: var(--white);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .comparison-card h4 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .comparison-table {
+    font-size: var(--font-size-sm);
+  }
+
+  .comparison-table th:first-child,
+  .comparison-table td:first-child {
+    text-align: left;
+    font-weight: 500;
+  }
+
+  .comparison-table th:not(:first-child),
+  .comparison-table td:not(:first-child) {
+    text-align: center;
+  }
+
+  .table-note {
+    font-size: var(--font-size-xs);
+    color: var(--gray-500);
+    margin-top: 1rem;
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  /* Steps */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+  }
+
+  .step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .step__number {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--blue);
+    color: var(--white);
+    font-weight: 700;
+    font-size: var(--font-size-xl);
+    border-radius: var(--radius-full);
+  }
+
+  .step__content h4 {
+    margin-bottom: 0.5rem;
+  }
+
+  .step__content p {
+    margin-bottom: 0;
+    color: var(--gray-600);
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat__number {
+    display: block;
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat__label {
+    font-size: var(--font-size-sm);
+    color: var(--gray-600);
+  }
+
+  /* Cards with icons */
+  .card__icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--blue);
+    color: var(--white);
+    border-radius: var(--radius-lg);
+    margin-bottom: 1.5rem;
+  }
+
+  .card h4 {
+    margin-bottom: 0.75rem;
+  }
+
+  .card p {
+    color: var(--gray-600);
+    margin-bottom: 0;
+  }
+
+  /* Tip box */
+  .tip-box {
+    background-color: var(--gray-50);
+    border-left: 4px solid var(--blue);
+    padding: 1.5rem 2rem;
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    margin-top: 3rem;
+  }
+
+  .tip-box h4 {
+    margin-bottom: 0.5rem;
+    color: var(--blue);
+  }
+
+  .tip-box p {
+    margin-bottom: 0;
+    color: var(--gray-600);
+  }
+
+  /* Methodology note */
+  .methodology-note {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius-xl);
+    margin-top: 2rem;
+  }
+
+  .methodology-note h4 {
+    margin-bottom: 0.75rem;
+  }
+
+  .methodology-note p {
+    margin-bottom: 0;
+    color: var(--gray-600);
+  }
+
+  /* Timeline */
+  .timeline {
+    max-width: 700px;
+    margin: 0 auto 3rem;
+  }
+
+  .timeline__item {
+    display: flex;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+    position: relative;
+  }
+
+  .timeline__item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 48px;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--gray-200);
+  }
+
+  .timeline__marker {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--blue);
+    color: var(--white);
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    position: relative;
+    z-index: 1;
+  }
+
+  .timeline__content h4 {
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline__content p {
+    margin-bottom: 0;
+    color: var(--gray-600);
+  }
+
+  /* Footer */
+  .footer {
+    background-color: var(--navy);
+    color: var(--gray-400);
+    padding: 3rem 0 2rem;
+  }
+
+  .footer__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 2rem;
+  }
+
+  .footer__logo {
+    display: block;
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer__brand p {
+    margin-bottom: 0;
+    font-size: var(--font-size-sm);
+  }
+
+  .footer__links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .footer__links a {
+    color: var(--gray-400);
+    font-size: var(--font-size-sm);
+  }
+
+  .footer__links a:hover {
+    color: var(--white);
+  }
+
+  .footer__disclaimer {
+    font-size: var(--font-size-sm);
+  }
+
+  .footer__disclaimer p {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer__disclaimer p:last-child {
+    margin-bottom: 0;
+    color: var(--gray-500);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .two-column {
+      grid-template-columns: 1fr;
+    }
+
+    .stats-bar {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .step {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+
+    .timeline__item::after {
+      display: none;
+    }
+
+    .footer__content {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .footer__links {
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  }
+</style>
