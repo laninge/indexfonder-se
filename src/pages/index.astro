@@ -280,22 +280,49 @@ const faqItems = [
 
       <div class="opti-steps">
         <h3>Så kommer du igång</h3>
-        <div class="opti-steps__grid">
+        <div class="opti-steps__list">
           <div class="opti-step">
-            <span class="opti-step__number">1</span>
-            <span class="opti-step__text">Ladda ner Opti-appen</span>
+            <div class="opti-step__number">1</div>
+            <div class="opti-step__content">
+              <h4>Ladda ner Opti-appen</h4>
+              <p>Finns på App Store och Google Play</p>
+            </div>
+          </div>
+          <div class="opti-step__arrow">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
           </div>
           <div class="opti-step">
-            <span class="opti-step__number">2</span>
-            <span class="opti-step__text">Svara på frågor om din ekonomi</span>
+            <div class="opti-step__number">2</div>
+            <div class="opti-step__content">
+              <h4>Svara på frågor om din ekonomi</h4>
+              <p>Vi anpassar portföljen efter din risknivå</p>
+            </div>
+          </div>
+          <div class="opti-step__arrow">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
           </div>
           <div class="opti-step">
-            <span class="opti-step__number">3</span>
-            <span class="opti-step__text">Få en personlig portfölj</span>
+            <div class="opti-step__number">3</div>
+            <div class="opti-step__content">
+              <h4>Få en personlig portfölj</h4>
+              <p>Baserad på 77 marknadsexponeringar</p>
+            </div>
+          </div>
+          <div class="opti-step__arrow">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
           </div>
           <div class="opti-step">
-            <span class="opti-step__number">4</span>
-            <span class="opti-step__text">Börja spara automatiskt</span>
+            <div class="opti-step__number">4</div>
+            <div class="opti-step__content">
+              <h4>Börja spara automatiskt</h4>
+              <p>Sätt upp månadssparande och låt pengarna växa</p>
+            </div>
           </div>
         </div>
         <div class="opti-steps__badges">
@@ -705,57 +732,81 @@ const faqItems = [
   }
 
   .opti-steps {
-    background-color: var(--gray-50);
+    background-color: var(--white);
     border-radius: var(--radius-xl);
-    padding: 2rem;
-    text-align: center;
+    padding: 2.5rem;
     margin-bottom: 3rem;
+    box-shadow: var(--shadow-lg);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .opti-steps h3 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
   }
 
-  .opti-steps__grid {
+  .opti-steps__list {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
   }
 
   .opti-step {
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    background-color: var(--white);
-    padding: 0.75rem 1.25rem;
-    border-radius: var(--radius-full);
-    border: 1px solid var(--gray-200);
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem 0;
   }
 
   .opti-step__number {
-    width: 28px;
-    height: 28px;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--opti-mint);
     color: var(--navy);
     font-weight: 700;
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
     border-radius: var(--radius-full);
   }
 
-  .opti-step__text {
-    font-weight: 500;
+  .opti-step__content {
+    flex: 1;
+    padding-top: 0.25rem;
+  }
+
+  .opti-step__content h4 {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
     color: var(--navy);
+  }
+
+  .opti-step__content p {
+    font-size: var(--font-size-sm);
+    color: var(--gray-500);
+    margin-bottom: 0;
+  }
+
+  .opti-step__arrow {
+    display: flex;
+    justify-content: center;
+    padding: 0.25rem 0;
+    color: var(--gray-300);
   }
 
   .opti-steps__badges {
     display: flex;
     gap: 0.75rem;
     justify-content: center;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--gray-200);
     flex-wrap: wrap;
   }
 
