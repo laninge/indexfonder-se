@@ -3,85 +3,91 @@
     {
       "name": "Avanza Global",
       "index": "MSCI World",
-      "fee": "0.10%",
-      "return1y": "+18.2%",
-      "return5y": "+72.4%",
+      "fee": "0.08%",
+      "return1y": "+22%",
+      "return5y": "+87%",
       "risk": "Medel"
     },
     {
       "name": "Länsförsäkringar Global Index",
       "index": "MSCI World",
-      "fee": "0.17%",
-      "return1y": "+17.9%",
-      "return5y": "+71.8%",
-      "risk": "Medel"
-    },
-    {
-      "name": "SPP Aktiefond Global",
-      "index": "MSCI World",
-      "fee": "0.14%",
-      "return1y": "+17.8%",
-      "return5y": "+70.2%",
-      "risk": "Medel"
-    },
-    {
-      "name": "Handelsbanken Global Index",
-      "index": "MSCI World",
       "fee": "0.20%",
-      "return1y": "+17.5%",
-      "return5y": "+69.8%",
+      "return1y": "+21%",
+      "return5y": "+85%",
+      "risk": "Medel"
+    },
+    {
+      "name": "Nordea Global Passiv",
+      "index": "MSCI World",
+      "fee": "0.19%",
+      "return1y": "+21%",
+      "return5y": "+84%",
       "risk": "Medel"
     },
     {
       "name": "Nordnet Indexfond Global",
+      "index": "MSCI World ESG",
+      "fee": "0.20%",
+      "return1y": "+20%",
+      "return5y": "+82%",
+      "risk": "Medel"
+    },
+    {
+      "name": "Swedbank Robur Access Global",
       "index": "MSCI World",
       "fee": "0.20%",
-      "return1y": "+17.4%",
-      "return5y": "+68.5%",
+      "return1y": "+20%",
+      "return5y": "+81%",
       "risk": "Medel"
     }
   ],
   "sweden": [
     {
       "name": "Avanza Zero",
-      "index": "SIX PRX",
+      "index": "OMX30 (30 storbolag)",
       "fee": "0.00%",
-      "return1y": "+12.4%",
-      "return5y": "+58.2%",
+      "return1y": "+14%",
+      "return5y": "+62%",
       "risk": "Hög"
     },
     {
-      "name": "SPP Sverige Plus",
-      "index": "SIX PRX",
-      "fee": "0.10%",
-      "return1y": "+12.1%",
-      "return5y": "+56.8%",
+      "name": "Nordnet Indexfond Sverige",
+      "index": "Sverige (100+ bolag)",
+      "fee": "0.00%",
+      "return1y": "+12%",
+      "return5y": "+51%",
+      "risk": "Hög"
+    },
+    {
+      "name": "SEB Sverige Indexnära",
+      "index": "SIX Return Index",
+      "fee": "0.24%",
+      "return1y": "+12%",
+      "return5y": "+51%",
       "risk": "Hög"
     },
     {
       "name": "Länsförsäkringar Sverige Index",
-      "index": "SIX PRX",
+      "index": "OMXSB",
       "fee": "0.20%",
-      "return1y": "+11.8%",
-      "return5y": "+55.4%",
+      "return1y": "+11%",
+      "return5y": "+50%",
       "risk": "Hög"
     },
     {
-      "name": "Handelsbanken Sverige Index",
-      "index": "SIX PRX",
-      "fee": "0.20%",
-      "return1y": "+11.6%",
-      "return5y": "+54.2%",
-      "risk": "Hög"
-    },
-    {
-      "name": "SEB Sverige Indexfond",
-      "index": "SIX PRX",
-      "fee": "0.25%",
-      "return1y": "+11.2%",
-      "return5y": "+52.8%",
+      "name": "PLUS Allabolag Sverige Index",
+      "index": "Sverige (300 bolag)",
+      "fee": "0.30%",
+      "return1y": "+11%",
+      "return5y": "+48%",
       "risk": "Hög"
     }
   ],
-  "lastUpdated": "2026-02-01"
+  "lastUpdated": "2026-02-03",
+  "sources": [
+    "borskollen.se",
+    "investorunner.com",
+    "globalgains.se",
+    "rikatillsammans.se"
+  ]
 }
