@@ -1,9 +1,9 @@
 ---
-// Sparräknare - interactive calculator
+// Ränta på ränta-kalkulator - interactive calculator with graph
 ---
 
 <div class="calculator card">
-  <h3 class="calculator__title">Sparräknare</h3>
+  <h3 class="calculator__title">Ränta på ränta-kalkulator</h3>
   <p class="calculator__subtitle">Se hur ditt sparande kan växa över tid</p>
 
   <div class="calculator__form">
@@ -52,18 +52,33 @@
     </div>
   </div>
 
+  <div class="calculator__chart">
+    <canvas id="savingsChart" width="500" height="250"></canvas>
+  </div>
+
   <div class="calculator__result">
     <div class="calculator__result-row">
       <span class="calculator__result-label">Totalt insatt</span>
-      <span class="calculator__result-value" id="totalInvested">480 000 kr</span>
+      <span class="calculator__result-value calculator__result-value--invested" id="totalInvested">480 000 kr</span>
     </div>
     <div class="calculator__result-row">
-      <span class="calculator__result-label">Avkastning</span>
-      <span class="calculator__result-value text-green" id="totalReturn">560 000 kr</span>
+      <span class="calculator__result-label">Avkastning (ränta på ränta)</span>
+      <span class="calculator__result-value calculator__result-value--return" id="totalReturn">560 000 kr</span>
     </div>
     <div class="calculator__result-row calculator__result-row--total">
       <span class="calculator__result-label">Totalt värde</span>
       <span class="calculator__result-value" id="totalValue">1 040 000 kr</span>
+    </div>
+  </div>
+
+  <div class="calculator__legend">
+    <div class="calculator__legend-item">
+      <span class="calculator__legend-color calculator__legend-color--invested"></span>
+      <span>Insatt belopp</span>
+    </div>
+    <div class="calculator__legend-item">
+      <span class="calculator__legend-color calculator__legend-color--return"></span>
+      <span>Avkastning</span>
     </div>
   </div>
 
@@ -75,7 +90,7 @@
 
 <style>
   .calculator {
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
   }
 
@@ -89,9 +104,9 @@
   }
 
   .calculator__form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
     margin-bottom: 2rem;
   }
 
@@ -111,9 +126,9 @@
 
   .calculator__field input {
     width: 100%;
-    padding: 0.875rem 1rem;
-    padding-right: 3rem;
-    font-size: var(--font-size-lg);
+    padding: 0.75rem 1rem;
+    padding-right: 2.5rem;
+    font-size: var(--font-size-base);
     font-weight: 600;
     border: 2px solid var(--gray-200);
     border-radius: var(--radius-lg);
@@ -129,16 +144,29 @@
 
   .calculator__suffix {
     position: absolute;
-    right: 1rem;
+    right: 0.75rem;
     color: var(--gray-500);
     font-weight: 500;
+    font-size: var(--font-size-sm);
+  }
+
+  .calculator__chart {
+    background-color: var(--gray-50);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .calculator__chart canvas {
+    width: 100% !important;
+    height: auto !important;
   }
 
   .calculator__result {
     background-color: var(--gray-50);
     border-radius: var(--radius-lg);
     padding: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .calculator__result-row {
@@ -175,14 +203,57 @@
     color: var(--navy);
   }
 
+  .calculator__result-value--invested {
+    color: var(--navy);
+  }
+
+  .calculator__result-value--return {
+    color: var(--opti-mint);
+  }
+
   .calculator__result-row--total .calculator__result-value {
     font-size: var(--font-size-xl);
+  }
+
+  .calculator__legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .calculator__legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--font-size-sm);
+    color: var(--gray-600);
+  }
+
+  .calculator__legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+  }
+
+  .calculator__legend-color--invested {
+    background-color: var(--navy);
+  }
+
+  .calculator__legend-color--return {
+    background-color: var(--opti-mint);
   }
 
   .calculator__disclaimer {
     font-size: var(--font-size-sm);
     color: var(--gray-500);
     margin-bottom: 0;
+  }
+
+  @media (max-width: 600px) {
+    .calculator__form {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 
@@ -192,6 +263,140 @@
       style: 'decimal',
       maximumFractionDigits: 0,
     }).format(value) + ' kr';
+  }
+
+  function getYearlyData(monthly: number, years: number, annualReturn: number): { invested: number[], total: number[] } {
+    const monthlyReturn = annualReturn / 100 / 12;
+    const invested: number[] = [];
+    const total: number[] = [];
+
+    for (let year = 1; year <= years; year++) {
+      const months = year * 12;
+      const totalInvested = monthly * months;
+
+      let totalValue: number;
+      if (monthlyReturn === 0) {
+        totalValue = totalInvested;
+      } else {
+        totalValue = monthly * ((Math.pow(1 + monthlyReturn, months) - 1) / monthlyReturn);
+      }
+
+      invested.push(totalInvested);
+      total.push(totalValue);
+    }
+
+    return { invested, total };
+  }
+
+  function drawChart(invested: number[], total: number[]): void {
+    const canvas = document.getElementById('savingsChart') as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+
+    const width = rect.width;
+    const height = rect.height;
+    const padding = { top: 20, right: 20, bottom: 30, left: 60 };
+    const chartWidth = width - padding.left - padding.right;
+    const chartHeight = height - padding.top - padding.bottom;
+
+    ctx.clearRect(0, 0, width, height);
+
+    const maxValue = Math.max(...total);
+    const years = total.length;
+
+    // Draw grid lines
+    ctx.strokeStyle = '#e2e8f0';
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 4; i++) {
+      const y = padding.top + (chartHeight / 4) * i;
+      ctx.beginPath();
+      ctx.moveTo(padding.left, y);
+      ctx.lineTo(width - padding.right, y);
+      ctx.stroke();
+    }
+
+    // Y-axis labels
+    ctx.fillStyle = '#64748b';
+    ctx.font = '11px system-ui';
+    ctx.textAlign = 'right';
+    for (let i = 0; i <= 4; i++) {
+      const value = maxValue - (maxValue / 4) * i;
+      const y = padding.top + (chartHeight / 4) * i;
+      const label = value >= 1000000
+        ? (value / 1000000).toFixed(1) + ' mkr'
+        : (value / 1000).toFixed(0) + ' tkr';
+      ctx.fillText(label, padding.left - 10, y + 4);
+    }
+
+    // X-axis labels
+    ctx.textAlign = 'center';
+    const step = Math.ceil(years / 5);
+    for (let i = 0; i <= years; i += step) {
+      if (i === 0) continue;
+      const x = padding.left + (i / years) * chartWidth;
+      ctx.fillText(i + ' år', x, height - 10);
+    }
+
+    // Draw stacked area chart
+    const getX = (index: number) => padding.left + ((index + 1) / years) * chartWidth;
+    const getY = (value: number) => padding.top + chartHeight - (value / maxValue) * chartHeight;
+
+    // Total area (mint - return portion on top)
+    ctx.beginPath();
+    ctx.moveTo(padding.left, padding.top + chartHeight);
+    for (let i = 0; i < years; i++) {
+      ctx.lineTo(getX(i), getY(total[i]));
+    }
+    ctx.lineTo(getX(years - 1), padding.top + chartHeight);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(62, 205, 163, 0.3)';
+    ctx.fill();
+
+    // Invested area (navy - base)
+    ctx.beginPath();
+    ctx.moveTo(padding.left, padding.top + chartHeight);
+    for (let i = 0; i < years; i++) {
+      ctx.lineTo(getX(i), getY(invested[i]));
+    }
+    ctx.lineTo(getX(years - 1), padding.top + chartHeight);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.3)';
+    ctx.fill();
+
+    // Draw lines
+    ctx.lineWidth = 2;
+
+    // Total line (mint)
+    ctx.beginPath();
+    ctx.strokeStyle = '#3ECDA3';
+    for (let i = 0; i < years; i++) {
+      if (i === 0) {
+        ctx.moveTo(getX(i), getY(total[i]));
+      } else {
+        ctx.lineTo(getX(i), getY(total[i]));
+      }
+    }
+    ctx.stroke();
+
+    // Invested line (navy)
+    ctx.beginPath();
+    ctx.strokeStyle = '#0f172a';
+    for (let i = 0; i < years; i++) {
+      if (i === 0) {
+        ctx.moveTo(getX(i), getY(invested[i]));
+      } else {
+        ctx.lineTo(getX(i), getY(invested[i]));
+      }
+    }
+    ctx.stroke();
   }
 
   function calculateSavings(): void {
@@ -204,7 +409,6 @@
 
     const totalInvested = monthly * months;
 
-    // Future value of a series formula
     let totalValue: number;
     if (monthlyReturn === 0) {
       totalValue = totalInvested;
@@ -217,6 +421,10 @@
     (document.getElementById('totalInvested') as HTMLElement).textContent = formatCurrency(totalInvested);
     (document.getElementById('totalReturn') as HTMLElement).textContent = formatCurrency(totalReturn);
     (document.getElementById('totalValue') as HTMLElement).textContent = formatCurrency(totalValue);
+
+    // Update chart
+    const data = getYearlyData(monthly, Math.floor(years), annualReturn);
+    drawChart(data.invested, data.total);
   }
 
   // Add event listeners
@@ -226,4 +434,7 @@
 
   // Initial calculation
   calculateSavings();
+
+  // Redraw on resize
+  window.addEventListener('resize', calculateSavings);
 </script>
