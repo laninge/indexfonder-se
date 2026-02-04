@@ -1,7 +1,7 @@
 name: Update Fund Data                                                                                                    
                                                                                                                             
 on:                                                                                                                       
-    schedule:                                                                                                               
+  schedule:                                                                                                               
       - cron: '0 6 1 * *'                                                                                                   
     workflow_dispatch:                                                                                                      
                                                                                                                             
