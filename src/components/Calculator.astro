@@ -1,294 +1,452 @@
 ---
-// Ränta på ränta-kalkulator - interactive calculator with graph
+// Ränta på ränta-kalkulator - Lysa-inspired design with Opti colors
 ---
 
-<div class="calculator card">
-  <h3 class="calculator__title">Ränta på ränta-kalkulator</h3>
-  <p class="calculator__subtitle">Se hur ditt sparande kan växa över tid</p>
+<section class="calculator-section" id="kalkylator">
+  <div class="calculator-container">
+    <div class="calculator-header">
+      <h2>Ränta på ränta-kalkylator</h2>
+      <p>Se hur ditt sparande kan växa över tid med ränta på ränta-effekten</p>
+    </div>
 
-  <div class="calculator__form">
-    <div class="calculator__field">
-      <label for="monthly">Månadssparande</label>
-      <div class="calculator__input-wrapper">
-        <input
-          type="number"
-          id="monthly"
-          value="2000"
-          min="100"
-          max="100000"
-          step="100"
-        />
-        <span class="calculator__suffix">kr</span>
+    <div class="calculator-layout">
+      <div class="calculator-inputs">
+        <div class="calculator-field">
+          <div class="calculator-field__header">
+            <label for="startAmount">Startbelopp</label>
+            <div class="calculator-field__value">
+              <span id="startAmountDisplay">10 000</span> kr
+            </div>
+          </div>
+          <input
+            type="range"
+            id="startAmount"
+            min="0"
+            max="500000"
+            step="5000"
+            value="10000"
+            class="calculator-slider"
+          />
+          <div class="calculator-field__range">
+            <span>0 kr</span>
+            <span>500 000 kr</span>
+          </div>
+        </div>
+
+        <div class="calculator-field">
+          <div class="calculator-field__header">
+            <label for="monthly">Månadssparande</label>
+            <div class="calculator-field__value">
+              <span id="monthlyDisplay">2 000</span> kr
+            </div>
+          </div>
+          <input
+            type="range"
+            id="monthly"
+            min="0"
+            max="20000"
+            step="500"
+            value="2000"
+            class="calculator-slider"
+          />
+          <div class="calculator-field__range">
+            <span>0 kr</span>
+            <span>20 000 kr</span>
+          </div>
+        </div>
+
+        <div class="calculator-field">
+          <div class="calculator-field__header">
+            <label for="years">Spartid</label>
+            <div class="calculator-field__value">
+              <span id="yearsDisplay">20</span> år
+            </div>
+          </div>
+          <input
+            type="range"
+            id="years"
+            min="1"
+            max="40"
+            step="1"
+            value="20"
+            class="calculator-slider"
+          />
+          <div class="calculator-field__range">
+            <span>1 år</span>
+            <span>40 år</span>
+          </div>
+        </div>
+
+        <div class="calculator-field">
+          <div class="calculator-field__header">
+            <label for="return">Årlig avkastning</label>
+            <div class="calculator-field__value">
+              <span id="returnDisplay">7</span> %
+            </div>
+          </div>
+          <input
+            type="range"
+            id="return"
+            min="0"
+            max="15"
+            step="0.5"
+            value="7"
+            class="calculator-slider"
+          />
+          <div class="calculator-field__range">
+            <span>0 %</span>
+            <span>15 %</span>
+          </div>
+          <p class="calculator-field__hint">7% är historiskt snitt för global aktiemarknad</p>
+        </div>
+      </div>
+
+      <div class="calculator-results">
+        <div class="calculator-total">
+          <span class="calculator-total__label">Totalt efter <span id="totalYears">20</span> år</span>
+          <span class="calculator-total__value" id="totalValue">1 050 509</span>
+          <span class="calculator-total__currency">kr</span>
+        </div>
+
+        <div class="calculator-chart">
+          <canvas id="savingsChart"></canvas>
+        </div>
+
+        <div class="calculator-breakdown">
+          <div class="calculator-breakdown__item calculator-breakdown__item--return">
+            <span class="calculator-breakdown__color"></span>
+            <span class="calculator-breakdown__label">Avkastning</span>
+            <span class="calculator-breakdown__value" id="totalReturn">569 509 kr</span>
+          </div>
+          <div class="calculator-breakdown__item calculator-breakdown__item--monthly">
+            <span class="calculator-breakdown__color"></span>
+            <span class="calculator-breakdown__label">Månadssparande</span>
+            <span class="calculator-breakdown__value" id="totalMonthly">480 000 kr</span>
+          </div>
+          <div class="calculator-breakdown__item calculator-breakdown__item--start">
+            <span class="calculator-breakdown__color"></span>
+            <span class="calculator-breakdown__label">Startbelopp</span>
+            <span class="calculator-breakdown__value" id="totalStart">10 000 kr</span>
+          </div>
+        </div>
+
+        <p class="calculator-disclaimer">
+          Beräkningen är en förenklad uppskattning. Historisk avkastning är ingen garanti för framtida resultat.
+        </p>
       </div>
     </div>
-
-    <div class="calculator__field">
-      <label for="years">Spartid</label>
-      <div class="calculator__input-wrapper">
-        <input
-          type="number"
-          id="years"
-          value="20"
-          min="1"
-          max="50"
-        />
-        <span class="calculator__suffix">år</span>
-      </div>
-    </div>
-
-    <div class="calculator__field">
-      <label for="return">Förväntad avkastning</label>
-      <div class="calculator__input-wrapper">
-        <input
-          type="number"
-          id="return"
-          value="7"
-          min="0"
-          max="20"
-          step="0.5"
-        />
-        <span class="calculator__suffix">%</span>
-      </div>
-    </div>
   </div>
-
-  <div class="calculator__chart">
-    <canvas id="savingsChart" width="500" height="250"></canvas>
-  </div>
-
-  <div class="calculator__result">
-    <div class="calculator__result-row">
-      <span class="calculator__result-label">Totalt insatt</span>
-      <span class="calculator__result-value calculator__result-value--invested" id="totalInvested">480 000 kr</span>
-    </div>
-    <div class="calculator__result-row">
-      <span class="calculator__result-label">Avkastning (ränta på ränta)</span>
-      <span class="calculator__result-value calculator__result-value--return" id="totalReturn">560 000 kr</span>
-    </div>
-    <div class="calculator__result-row calculator__result-row--total">
-      <span class="calculator__result-label">Totalt värde</span>
-      <span class="calculator__result-value" id="totalValue">1 040 000 kr</span>
-    </div>
-  </div>
-
-  <div class="calculator__legend">
-    <div class="calculator__legend-item">
-      <span class="calculator__legend-color calculator__legend-color--invested"></span>
-      <span>Insatt belopp</span>
-    </div>
-    <div class="calculator__legend-item">
-      <span class="calculator__legend-color calculator__legend-color--return"></span>
-      <span>Avkastning</span>
-    </div>
-  </div>
-
-  <p class="calculator__disclaimer">
-    Beräkningen är en förenklad uppskattning och tar inte hänsyn till avgifter, skatter eller inflation.
-    Historisk avkastning är ingen garanti för framtida resultat.
-  </p>
-</div>
+</section>
 
 <style>
-  .calculator {
-    max-width: 600px;
+  .calculator-section {
+    background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%);
+    padding: 4rem 0;
+  }
+
+  .calculator-container {
+    max-width: 1000px;
     margin: 0 auto;
+    padding: 0 var(--container-padding);
   }
 
-  .calculator__title {
+  .calculator-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .calculator-header h2 {
+    font-size: var(--font-size-3xl);
     margin-bottom: 0.5rem;
   }
 
-  .calculator__subtitle {
+  .calculator-header p {
     color: var(--gray-500);
-    margin-bottom: 2rem;
-  }
-
-  .calculator__form {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .calculator__field label {
-    display: block;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    color: var(--navy);
-    font-size: var(--font-size-sm);
-  }
-
-  .calculator__input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-
-  .calculator__field input {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    padding-right: 2.5rem;
-    font-size: var(--font-size-base);
-    font-weight: 600;
-    border: 2px solid var(--gray-200);
-    border-radius: var(--radius-lg);
-    background-color: var(--gray-50);
-    transition: all var(--transition-fast);
-  }
-
-  .calculator__field input:focus {
-    outline: none;
-    border-color: var(--blue);
-    background-color: var(--white);
-  }
-
-  .calculator__suffix {
-    position: absolute;
-    right: 0.75rem;
-    color: var(--gray-500);
-    font-weight: 500;
-    font-size: var(--font-size-sm);
-  }
-
-  .calculator__chart {
-    background-color: var(--gray-50);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .calculator__chart canvas {
-    width: 100% !important;
-    height: auto !important;
-  }
-
-  .calculator__result {
-    background-color: var(--gray-50);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .calculator__result-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--gray-200);
-  }
-
-  .calculator__result-row:last-child {
-    border-bottom: none;
-  }
-
-  .calculator__result-row--total {
-    padding-top: 1rem;
-    margin-top: 0.5rem;
-    border-top: 2px solid var(--navy);
-    border-bottom: none;
-  }
-
-  .calculator__result-label {
-    color: var(--gray-600);
-  }
-
-  .calculator__result-row--total .calculator__result-label {
-    font-weight: 600;
-    color: var(--navy);
-  }
-
-  .calculator__result-value {
-    font-weight: 700;
     font-size: var(--font-size-lg);
-    color: var(--navy);
-  }
-
-  .calculator__result-value--invested {
-    color: var(--navy);
-  }
-
-  .calculator__result-value--return {
-    color: var(--opti-mint);
-  }
-
-  .calculator__result-row--total .calculator__result-value {
-    font-size: var(--font-size-xl);
-  }
-
-  .calculator__legend {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .calculator__legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: var(--font-size-sm);
-    color: var(--gray-600);
-  }
-
-  .calculator__legend-color {
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
-  }
-
-  .calculator__legend-color--invested {
-    background-color: var(--navy);
-  }
-
-  .calculator__legend-color--return {
-    background-color: var(--opti-mint);
-  }
-
-  .calculator__disclaimer {
-    font-size: var(--font-size-sm);
-    color: var(--gray-500);
     margin-bottom: 0;
   }
 
-  @media (max-width: 600px) {
-    .calculator__form {
+  .calculator-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  /* Inputs */
+  .calculator-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .calculator-field {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+  }
+
+  .calculator-field__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .calculator-field__header label {
+    font-weight: 600;
+    color: var(--navy);
+    font-size: var(--font-size-base);
+  }
+
+  .calculator-field__value {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--opti-mint);
+  }
+
+  .calculator-slider {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--gray-200);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  .calculator-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--opti-mint);
+    cursor: pointer;
+    border: 4px solid var(--white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform var(--transition-fast);
+  }
+
+  .calculator-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+  }
+
+  .calculator-slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--opti-mint);
+    cursor: pointer;
+    border: 4px solid var(--white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .calculator-field__range {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    font-size: var(--font-size-xs);
+    color: var(--gray-400);
+  }
+
+  .calculator-field__hint {
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+    font-size: var(--font-size-sm);
+    color: var(--gray-500);
+  }
+
+  /* Results */
+  .calculator-results {
+    background: var(--navy);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    color: var(--white);
+  }
+
+  .calculator-total {
+    text-align: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1.5rem;
+  }
+
+  .calculator-total__label {
+    display: block;
+    font-size: var(--font-size-base);
+    color: var(--gray-400);
+    margin-bottom: 0.5rem;
+  }
+
+  .calculator-total__value {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--opti-mint);
+    line-height: 1;
+  }
+
+  .calculator-total__currency {
+    font-size: var(--font-size-2xl);
+    font-weight: 400;
+    color: var(--gray-400);
+    margin-left: 0.25rem;
+  }
+
+  .calculator-chart {
+    height: 200px;
+    margin-bottom: 1.5rem;
+  }
+
+  .calculator-chart canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .calculator-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .calculator-breakdown__item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .calculator-breakdown__color {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  .calculator-breakdown__item--return .calculator-breakdown__color {
+    background: var(--opti-mint);
+  }
+
+  .calculator-breakdown__item--monthly .calculator-breakdown__color {
+    background: #60a5fa;
+  }
+
+  .calculator-breakdown__item--start .calculator-breakdown__color {
+    background: #a78bfa;
+  }
+
+  .calculator-breakdown__label {
+    flex: 1;
+    color: var(--gray-400);
+    font-size: var(--font-size-sm);
+  }
+
+  .calculator-breakdown__value {
+    font-weight: 600;
+    font-size: var(--font-size-base);
+  }
+
+  .calculator-disclaimer {
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+    font-size: var(--font-size-xs);
+    color: var(--gray-500);
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .calculator-layout {
       grid-template-columns: 1fr;
+    }
+
+    .calculator-results {
+      order: -1;
+    }
+
+    .calculator-total__value {
+      font-size: 2.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .calculator-field {
+      padding: 1rem;
+    }
+
+    .calculator-results {
+      padding: 1.5rem;
+    }
+
+    .calculator-total__value {
+      font-size: 2rem;
+    }
+
+    .calculator-chart {
+      height: 150px;
     }
   }
 </style>
 
 <script>
-  function formatCurrency(value: number): string {
-    return new Intl.NumberFormat('sv-SE', {
-      style: 'decimal',
-      maximumFractionDigits: 0,
-    }).format(value) + ' kr';
+  function formatNumber(value: number): string {
+    return new Intl.NumberFormat('sv-SE').format(Math.round(value));
   }
 
-  function getYearlyData(monthly: number, years: number, annualReturn: number): { invested: number[], total: number[] } {
+  function formatCurrency(value: number): string {
+    return formatNumber(value) + ' kr';
+  }
+
+  function updateSliderBackground(slider: HTMLInputElement): void {
+    const min = parseFloat(slider.min);
+    const max = parseFloat(slider.max);
+    const value = parseFloat(slider.value);
+    const percentage = ((value - min) / (max - min)) * 100;
+    slider.style.background = `linear-gradient(to right, #3ECDA3 0%, #3ECDA3 ${percentage}%, #e2e8f0 ${percentage}%, #e2e8f0 100%)`;
+  }
+
+  function getYearlyData(startAmount: number, monthly: number, years: number, annualReturn: number): {
+    startArr: number[],
+    monthlyArr: number[],
+    returnArr: number[],
+    total: number[]
+  } {
     const monthlyReturn = annualReturn / 100 / 12;
-    const invested: number[] = [];
+    const startArr: number[] = [];
+    const monthlyArr: number[] = [];
+    const returnArr: number[] = [];
     const total: number[] = [];
 
     for (let year = 1; year <= years; year++) {
       const months = year * 12;
-      const totalInvested = monthly * months;
 
-      let totalValue: number;
+      // Start amount with compound interest
+      const startWithInterest = startAmount * Math.pow(1 + annualReturn / 100, year);
+
+      // Monthly contributions with compound interest
+      let monthlyWithInterest: number;
       if (monthlyReturn === 0) {
-        totalValue = totalInvested;
+        monthlyWithInterest = monthly * months;
       } else {
-        totalValue = monthly * ((Math.pow(1 + monthlyReturn, months) - 1) / monthlyReturn);
+        monthlyWithInterest = monthly * ((Math.pow(1 + monthlyReturn, months) - 1) / monthlyReturn);
       }
 
-      invested.push(totalInvested);
+      const totalValue = startWithInterest + monthlyWithInterest;
+      const totalInvested = startAmount + (monthly * months);
+      const totalReturnValue = totalValue - totalInvested;
+
+      startArr.push(startAmount);
+      monthlyArr.push(monthly * months);
+      returnArr.push(totalReturnValue);
       total.push(totalValue);
     }
 
-    return { invested, total };
+    return { startArr, monthlyArr, returnArr, total };
   }
 
-  function drawChart(invested: number[], total: number[]): void {
+  function drawChart(data: { startArr: number[], monthlyArr: number[], returnArr: number[], total: number[] }): void {
     const canvas = document.getElementById('savingsChart') as HTMLCanvasElement;
     if (!canvas) return;
 
@@ -303,133 +461,112 @@
 
     const width = rect.width;
     const height = rect.height;
-    const padding = { top: 20, right: 20, bottom: 30, left: 60 };
+    const padding = { top: 10, right: 10, bottom: 25, left: 10 };
     const chartWidth = width - padding.left - padding.right;
     const chartHeight = height - padding.top - padding.bottom;
 
     ctx.clearRect(0, 0, width, height);
 
-    const maxValue = Math.max(...total);
-    const years = total.length;
+    const years = data.total.length;
+    const maxValue = Math.max(...data.total);
 
-    // Draw grid lines
-    ctx.strokeStyle = '#e2e8f0';
-    ctx.lineWidth = 1;
-    for (let i = 0; i <= 4; i++) {
-      const y = padding.top + (chartHeight / 4) * i;
-      ctx.beginPath();
-      ctx.moveTo(padding.left, y);
-      ctx.lineTo(width - padding.right, y);
-      ctx.stroke();
-    }
-
-    // Y-axis labels
-    ctx.fillStyle = '#64748b';
-    ctx.font = '11px system-ui';
-    ctx.textAlign = 'right';
-    for (let i = 0; i <= 4; i++) {
-      const value = maxValue - (maxValue / 4) * i;
-      const y = padding.top + (chartHeight / 4) * i;
-      const label = value >= 1000000
-        ? (value / 1000000).toFixed(1) + ' mkr'
-        : (value / 1000).toFixed(0) + ' tkr';
-      ctx.fillText(label, padding.left - 10, y + 4);
-    }
-
-    // X-axis labels
-    ctx.textAlign = 'center';
-    const step = Math.ceil(years / 5);
-    for (let i = 0; i <= years; i += step) {
-      if (i === 0) continue;
-      const x = padding.left + (i / years) * chartWidth;
-      ctx.fillText(i + ' år', x, height - 10);
-    }
-
-    // Draw stacked area chart
     const getX = (index: number) => padding.left + ((index + 1) / years) * chartWidth;
     const getY = (value: number) => padding.top + chartHeight - (value / maxValue) * chartHeight;
 
-    // Total area (mint - return portion on top)
+    // Draw stacked areas
+    // Return area (top - mint)
     ctx.beginPath();
     ctx.moveTo(padding.left, padding.top + chartHeight);
     for (let i = 0; i < years; i++) {
-      ctx.lineTo(getX(i), getY(total[i]));
+      ctx.lineTo(getX(i), getY(data.total[i]));
     }
     ctx.lineTo(getX(years - 1), padding.top + chartHeight);
     ctx.closePath();
-    ctx.fillStyle = 'rgba(62, 205, 163, 0.3)';
+    ctx.fillStyle = 'rgba(62, 205, 163, 0.6)';
     ctx.fill();
 
-    // Invested area (navy - base)
+    // Monthly area (middle - blue)
     ctx.beginPath();
     ctx.moveTo(padding.left, padding.top + chartHeight);
     for (let i = 0; i < years; i++) {
-      ctx.lineTo(getX(i), getY(invested[i]));
+      ctx.lineTo(getX(i), getY(data.startArr[i] + data.monthlyArr[i]));
     }
     ctx.lineTo(getX(years - 1), padding.top + chartHeight);
     ctx.closePath();
-    ctx.fillStyle = 'rgba(15, 23, 42, 0.3)';
+    ctx.fillStyle = 'rgba(96, 165, 250, 0.6)';
     ctx.fill();
 
-    // Draw lines
-    ctx.lineWidth = 2;
-
-    // Total line (mint)
+    // Start area (bottom - purple)
     ctx.beginPath();
-    ctx.strokeStyle = '#3ECDA3';
+    ctx.moveTo(padding.left, padding.top + chartHeight);
     for (let i = 0; i < years; i++) {
-      if (i === 0) {
-        ctx.moveTo(getX(i), getY(total[i]));
-      } else {
-        ctx.lineTo(getX(i), getY(total[i]));
-      }
+      ctx.lineTo(getX(i), getY(data.startArr[i]));
     }
-    ctx.stroke();
+    ctx.lineTo(getX(years - 1), padding.top + chartHeight);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(167, 139, 250, 0.6)';
+    ctx.fill();
 
-    // Invested line (navy)
-    ctx.beginPath();
-    ctx.strokeStyle = '#0f172a';
-    for (let i = 0; i < years; i++) {
-      if (i === 0) {
-        ctx.moveTo(getX(i), getY(invested[i]));
-      } else {
-        ctx.lineTo(getX(i), getY(invested[i]));
-      }
-    }
-    ctx.stroke();
+    // X-axis labels
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+    ctx.font = '11px system-ui';
+    ctx.textAlign = 'center';
+    ctx.fillText('Idag', padding.left, height - 5);
+    ctx.fillText(`${years} år`, width - padding.right, height - 5);
   }
 
   function calculateSavings(): void {
+    const startAmount = parseFloat((document.getElementById('startAmount') as HTMLInputElement).value) || 0;
     const monthly = parseFloat((document.getElementById('monthly') as HTMLInputElement).value) || 0;
-    const years = parseFloat((document.getElementById('years') as HTMLInputElement).value) || 0;
+    const years = parseFloat((document.getElementById('years') as HTMLInputElement).value) || 1;
     const annualReturn = parseFloat((document.getElementById('return') as HTMLInputElement).value) || 0;
 
+    // Update display values
+    (document.getElementById('startAmountDisplay') as HTMLElement).textContent = formatNumber(startAmount);
+    (document.getElementById('monthlyDisplay') as HTMLElement).textContent = formatNumber(monthly);
+    (document.getElementById('yearsDisplay') as HTMLElement).textContent = years.toString();
+    (document.getElementById('returnDisplay') as HTMLElement).textContent = annualReturn.toString();
+    (document.getElementById('totalYears') as HTMLElement).textContent = years.toString();
+
+    // Calculate
     const monthlyReturn = annualReturn / 100 / 12;
     const months = years * 12;
 
-    const totalInvested = monthly * months;
+    // Start amount with compound interest
+    const startWithInterest = startAmount * Math.pow(1 + annualReturn / 100, years);
 
-    let totalValue: number;
+    // Monthly contributions with compound interest
+    let monthlyWithInterest: number;
     if (monthlyReturn === 0) {
-      totalValue = totalInvested;
+      monthlyWithInterest = monthly * months;
     } else {
-      totalValue = monthly * ((Math.pow(1 + monthlyReturn, months) - 1) / monthlyReturn);
+      monthlyWithInterest = monthly * ((Math.pow(1 + monthlyReturn, months) - 1) / monthlyReturn);
     }
 
-    const totalReturn = totalValue - totalInvested;
+    const totalValue = startWithInterest + monthlyWithInterest;
+    const totalInvested = startAmount + (monthly * months);
+    const totalReturnValue = totalValue - totalInvested;
 
-    (document.getElementById('totalInvested') as HTMLElement).textContent = formatCurrency(totalInvested);
-    (document.getElementById('totalReturn') as HTMLElement).textContent = formatCurrency(totalReturn);
-    (document.getElementById('totalValue') as HTMLElement).textContent = formatCurrency(totalValue);
+    // Update results
+    (document.getElementById('totalValue') as HTMLElement).textContent = formatNumber(totalValue);
+    (document.getElementById('totalReturn') as HTMLElement).textContent = formatCurrency(totalReturnValue);
+    (document.getElementById('totalMonthly') as HTMLElement).textContent = formatCurrency(monthly * months);
+    (document.getElementById('totalStart') as HTMLElement).textContent = formatCurrency(startAmount);
 
     // Update chart
-    const data = getYearlyData(monthly, Math.floor(years), annualReturn);
-    drawChart(data.invested, data.total);
+    const data = getYearlyData(startAmount, monthly, Math.floor(years), annualReturn);
+    drawChart(data);
+
+    // Update slider backgrounds
+    document.querySelectorAll('.calculator-slider').forEach(slider => {
+      updateSliderBackground(slider as HTMLInputElement);
+    });
   }
 
   // Add event listeners
-  ['monthly', 'years', 'return'].forEach(id => {
-    document.getElementById(id)?.addEventListener('input', calculateSavings);
+  ['startAmount', 'monthly', 'years', 'return'].forEach(id => {
+    const el = document.getElementById(id);
+    el?.addEventListener('input', calculateSavings);
   });
 
   // Initial calculation
