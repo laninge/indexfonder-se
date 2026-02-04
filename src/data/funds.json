@@ -1,20 +1,76 @@
 {
   "global": [
     {
+      "name": "Alecta Global Aktieindexfond",
+      "index": "MSCI World",
+      "fee": "0.02%",
+      "return1y": "+22%",
+      "return5y": "+88%",
+      "risk": "Medel",
+      "institutional": true
+    },
+    {
+      "name": "Blackrock World Index Fund Institutional",
+      "index": "MSCI World",
+      "fee": "0.05%",
+      "return1y": "+22%",
+      "return5y": "+88%",
+      "risk": "Medel",
+      "institutional": true
+    },
+    {
+      "name": "Vanguard Global Stock Index Inst",
+      "index": "MSCI World",
+      "fee": "0.06%",
+      "return1y": "+22%",
+      "return5y": "+87%",
+      "risk": "Medel",
+      "institutional": true
+    },
+    {
       "name": "Avanza Global",
       "index": "MSCI World",
       "fee": "0.08%",
       "return1y": "+22%",
       "return5y": "+87%",
-      "risk": "Medel"
+      "risk": "Medel",
+      "institutional": false
     },
     {
-      "name": "Länsförsäkringar Global Index",
+      "name": "State Street World Index Equity Fund P",
       "index": "MSCI World",
-      "fee": "0.20%",
+      "fee": "0.08%",
+      "return1y": "+21%",
+      "return5y": "+86%",
+      "risk": "Medel",
+      "institutional": true
+    },
+    {
+      "name": "Nordea Global Passiv Institutional",
+      "index": "MSCI World",
+      "fee": "0.10%",
       "return1y": "+21%",
       "return5y": "+85%",
-      "risk": "Medel"
+      "risk": "Medel",
+      "institutional": true
+    },
+    {
+      "name": "AMF Aktiefond Global",
+      "index": "MSCI World",
+      "fee": "0.14%",
+      "return1y": "+21%",
+      "return5y": "+84%",
+      "risk": "Medel",
+      "institutional": true
+    },
+    {
+      "name": "SPP Aktiefond Global",
+      "index": "MSCI World",
+      "fee": "0.15%",
+      "return1y": "+21%",
+      "return5y": "+83%",
+      "risk": "Medel",
+      "institutional": false
     },
     {
       "name": "Nordea Global Passiv",
@@ -22,7 +78,17 @@
       "fee": "0.19%",
       "return1y": "+21%",
       "return5y": "+84%",
-      "risk": "Medel"
+      "risk": "Medel",
+      "institutional": false
+    },
+    {
+      "name": "Länsförsäkringar Global Index",
+      "index": "MSCI World",
+      "fee": "0.20%",
+      "return1y": "+21%",
+      "return5y": "+85%",
+      "risk": "Medel",
+      "institutional": false
     },
     {
       "name": "Nordnet Indexfond Global",
@@ -30,7 +96,8 @@
       "fee": "0.20%",
       "return1y": "+20%",
       "return5y": "+82%",
-      "risk": "Medel"
+      "risk": "Medel",
+      "institutional": false
     },
     {
       "name": "Swedbank Robur Access Global",
@@ -38,17 +105,37 @@
       "fee": "0.20%",
       "return1y": "+20%",
       "return5y": "+81%",
-      "risk": "Medel"
+      "risk": "Medel",
+      "institutional": false
+    },
+    {
+      "name": "Handelsbanken Global Index Criteria",
+      "index": "MSCI World SRI",
+      "fee": "0.20%",
+      "return1y": "+19%",
+      "return5y": "+78%",
+      "risk": "Medel",
+      "institutional": false
+    },
+    {
+      "name": "Storebrand Global Indeks",
+      "index": "MSCI World",
+      "fee": "0.20%",
+      "return1y": "+21%",
+      "return5y": "+84%",
+      "risk": "Medel",
+      "institutional": false
     }
   ],
   "sweden": [
     {
       "name": "Avanza Zero",
-      "index": "OMX30 (30 storbolag)",
+      "index": "OMX30",
       "fee": "0.00%",
       "return1y": "+14%",
       "return5y": "+62%",
-      "risk": "Hög"
+      "risk": "Hög",
+      "institutional": false
     },
     {
       "name": "Nordnet Indexfond Sverige",
@@ -56,15 +143,71 @@
       "fee": "0.00%",
       "return1y": "+12%",
       "return5y": "+51%",
-      "risk": "Hög"
+      "risk": "Hög",
+      "institutional": false
     },
     {
-      "name": "SEB Sverige Indexnära",
+      "name": "Alecta Sverige Aktieindexfond",
       "index": "SIX Return Index",
-      "fee": "0.24%",
+      "fee": "0.02%",
+      "return1y": "+14%",
+      "return5y": "+55%",
+      "risk": "Hög",
+      "institutional": true
+    },
+    {
+      "name": "Swedbank Robur Sverigefond Inst",
+      "index": "SIX Return Index",
+      "fee": "0.06%",
       "return1y": "+12%",
       "return5y": "+51%",
-      "risk": "Hög"
+      "risk": "Hög",
+      "institutional": true
+    },
+    {
+      "name": "Nordea Sverige Passiv Institutional",
+      "index": "OMXSB GI",
+      "fee": "0.08%",
+      "return1y": "+12%",
+      "return5y": "+52%",
+      "risk": "Hög",
+      "institutional": true
+    },
+    {
+      "name": "Handelsbanken Sverige Index Inst",
+      "index": "SIX SRI Sweden",
+      "fee": "0.08%",
+      "return1y": "+13%",
+      "return5y": "+53%",
+      "risk": "Hög",
+      "institutional": true
+    },
+    {
+      "name": "AMF Aktiefond Sverige",
+      "index": "SIX Return Index",
+      "fee": "0.10%",
+      "return1y": "+13%",
+      "return5y": "+54%",
+      "risk": "Hög",
+      "institutional": true
+    },
+    {
+      "name": "SEB Sverige Indexfond Inst",
+      "index": "SIX Return Index",
+      "fee": "0.10%",
+      "return1y": "+12%",
+      "return5y": "+52%",
+      "risk": "Hög",
+      "institutional": true
+    },
+    {
+      "name": "SPP Aktiefond Sverige",
+      "index": "SIX Portfolio Return",
+      "fee": "0.15%",
+      "return1y": "+12%",
+      "return5y": "+50%",
+      "risk": "Hög",
+      "institutional": false
     },
     {
       "name": "Länsförsäkringar Sverige Index",
@@ -72,7 +215,35 @@
       "fee": "0.20%",
       "return1y": "+11%",
       "return5y": "+50%",
-      "risk": "Hög"
+      "risk": "Hög",
+      "institutional": false
+    },
+    {
+      "name": "Handelsbanken Sverige Index Criteria",
+      "index": "SIX SRI Sweden",
+      "fee": "0.20%",
+      "return1y": "+12%",
+      "return5y": "+52%",
+      "risk": "Hög",
+      "institutional": false
+    },
+    {
+      "name": "Swedbank Robur Sverigefond",
+      "index": "SIX Return Index",
+      "fee": "0.20%",
+      "return1y": "+11%",
+      "return5y": "+49%",
+      "risk": "Hög",
+      "institutional": false
+    },
+    {
+      "name": "SEB Sverige Indexnära",
+      "index": "SIX Return Index",
+      "fee": "0.24%",
+      "return1y": "+12%",
+      "return5y": "+51%",
+      "risk": "Hög",
+      "institutional": false
     },
     {
       "name": "PLUS Allabolag Sverige Index",
@@ -80,14 +251,16 @@
       "fee": "0.30%",
       "return1y": "+11%",
       "return5y": "+48%",
-      "risk": "Hög"
+      "risk": "Hög",
+      "institutional": false
     }
   ],
-  "lastUpdated": "2026-02-03",
+  "lastUpdated": "2026-02-04",
   "sources": [
-    "borskollen.se",
-    "investorunner.com",
-    "globalgains.se",
-    "rikatillsammans.se"
-  ]
+    "morningstar.se",
+    "avanza.se",
+    "nordnet.se",
+    "fondmarknaden.se"
+  ],
+  "disclaimer": "Inkluderar fonder för både privatpersoner och institutionella investerare. Historisk avkastning är ingen garanti för framtida resultat."
 }
