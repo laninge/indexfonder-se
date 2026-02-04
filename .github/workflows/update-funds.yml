@@ -1,11 +1,11 @@
 name: Update Fund Data                                                                                                    
                                                                                                                             
-  on:                                                                                                                       
+on:                                                                                                                       
     schedule:                                                                                                               
       - cron: '0 6 1 * *'                                                                                                   
     workflow_dispatch:                                                                                                      
                                                                                                                             
-  jobs:                                                                                                                     
+jobs:                                                                                                                     
     update-funds:                                                                                                           
       runs-on: ubuntu-latest                                                                                                
       steps:                                                                                                                
